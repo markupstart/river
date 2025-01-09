@@ -35,22 +35,20 @@ export CLUTTER_BACKEND=wayland
 riverctl spawn "lxpolkit"
 riverctl spawn "dbus-update-activation-environment --all"
 riverctl spawn "dunst"
-riverctl spawn  "wlr-randr --output DP-0 --mode 5120x1440"
+riverctl spawn  "wlr-randr --output DP-1 --mode 3840x1080"
 riverctl spawn "waybar"
-riverctl spawn "/home/mark/.local/bin/wideriver --border-width 3 --border-color-focused 0xffa500ff --layout wide --stack dwindle --count-master 1 --ratio-master 0.3  --count-wide-left 1 --ratio-wide 0.3"
-#riverctl spawn "hyprpaper"
-riverctl spawn "swaybg -i /home/mark/Pictures/bluefin\ backgrounds/backgrounds/bluefin/WallPaper_SummerDay_Post.webp -m stretch"
-#riverctl spawn "wbg /home/mark/Washington\ -\ Creative\ wallpaper\ -\ Topaz\ Clean\ 3\ version.jpg"
+riverctl spawn "wideriver --border-width 3 --border-color-focused 0xffa500ff --layout wide --stack dwindle --count-master 1 --ratio-master 0.3  --count-wide-left 1 --ratio-wide 0.333"
+riverctl spawn "swaybg -i /home/mark/wide-screen-wallpapers/woods.png"
 #riverctl spawn "pipewire &"
 riverctl rule-add ssd
 
 # Super+Shift+Return to start an instance of foot (https://codeberg.org/dnkl/foot)
-riverctl map normal Super A spawn ptyxis
-riverctl map normal Super F spawn "flatpak run org.mozilla.firefox"
+riverctl map normal Super A spawn ghostty
+riverctl map normal Super F spawn firefox
 riverctl map normal Super T spawn nautilus
-riverctl map normal Super G spawn "flatpak run net.lutris.Lutris"
+riverctl map normal Super G spawn lutris
 riverctl map normal Super O spawn "flatpak run com.obsproject.Studio"
-riverctl map normal Super P spawn fuzzel
+riverctl map normal Super P spawn "rofi -show drun"
 riverctl map normal Super F4 spawn "killall -SIGUSR1 gpu-screen-recorder"
 riverctl map normal Super Print spawn grim
 # Super+Q to close the focused view
@@ -105,9 +103,9 @@ riverctl map normal Super+Alt+Shift J resize vertical 100
 riverctl map normal Super+Alt+Shift K resize vertical -100
 riverctl map normal Super+Alt+Shift L resize horizontal 100
 
-riverctl map normal Super U send-layout-cmd wideriver "--layout wide --stack dwindle --count 1 --ratio 0.3"
-riverctl map normal Super I send-layout-cmd wideriver "--layout wide --stack dwindle --count 2 --ratio 0.3 count 1"
-riverctl map normal Super Y send-layout-cmd wideriver "--layout wide --stack dwindle --count 3 --ratio 0.3 count 2"
+riverctl map normal Super U send-layout-cmd wideriver "--layout wide --stack dwindle --count 1 --ratio 0.333"
+riverctl map normal Super I send-layout-cmd wideriver "--layout wide --stack dwindle --count 2 --ratio 0.333 count 1"
+riverctl map normal Super Y send-layout-cmd wideriver "--layout wide --stack dwindle --count 3 --ratio 0.333 count 2"
 
 
 # Super + Left Mouse Button to move views
@@ -172,9 +170,9 @@ do
     riverctl map $mode None XF86Eject spawn 'eject -T'
 
     # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
-    riverctl map $mode None XF86AudioRaiseVolume  spawn '/var/home/mark/.local/bin/pw-volume change +2.5%; pkill -RTMIN+8 waybar'
-    riverctl map $mode None XF86AudioLowerVolume  spawn '/var/home/mark/.local/bin/pw-volume change -2.5%; pkill -RTMIN+8 waybar'
-    riverctl map $mode None XF86AudioMute         spawn '/var/home/mark/.local/bin/pw-volume mute toggle; pkill -RTMIN+8 waybar'
+    riverctl map $mode None XF86AudioRaiseVolume  spawn 'pw-volume change +2.5%; pkill -RTMIN+8 waybar'
+    riverctl map $mode None XF86AudioLowerVolume  spawn 'pw-volume change -2.5%; pkill -RTMIN+8 waybar'
+    riverctl map $mode None XF86AudioMute         spawn 'pw-volume mute toggle; pkill -RTMIN+8 waybar'
 
     # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
     riverctl map $mode None XF86AudioMedia spawn 'playerctl play-pause'
